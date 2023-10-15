@@ -21,7 +21,7 @@ int _printf(const char *format, ...)
 	{
 	if(ch == '%')
 	{
-	switch(ch++)
+	switch(ch)
 	{
 		case 'c':
 			int cha;
