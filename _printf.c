@@ -20,7 +20,7 @@ int _printf(const char *format, ...)
 	{
 	if (ch == '%') 
 	{
-		int cha;
+		char cha;
 		const char* value;
 		ch = *format++;
 		switch (ch)
