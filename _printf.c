@@ -20,11 +20,11 @@ int _printf(const char *format, ...)
 	{
 	if (ch == '%') 
 	{
+		int cha;
+		const char* value;
 		ch = *format++;
 		switch (ch)
 		{
-			char cha;
-			const char* value;
 		case 'c':
 			cha = va_arg(args, int);
 			_putchar(cha);
