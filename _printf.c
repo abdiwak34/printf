@@ -16,7 +16,6 @@ int _printf(const char *format, ...)
 
 	count = 0;
 	va_start(args, format);
-<<<<<<< HEAD
 	while(*format++ != '\n')
 	{
 	if((ch = *format) != '%')
@@ -24,11 +23,9 @@ int _printf(const char *format, ...)
 		ch++;
 	}
 	switch(*++format)
-=======
 	while ((ch = *format++) != '\0')
 	{
-	if (ch == '%') 
->>>>>>> d6d4670154d27da65ced530b544cd2d8b00620e5
+	if (ch == '%')
 	{
 		char cha;
 		const char* value;
@@ -68,11 +65,5 @@ int _printf(const char *format, ...)
 	}
 	va_end(args);
 	return count;
+	}
 }
-<<<<<<< HEAD
-}
-
-
-
-=======
->>>>>>> d6d4670154d27da65ced530b544cd2d8b00620e5
