@@ -16,12 +16,12 @@ int _printf(const char *format, ...)
 
 	count = 0;
 	va_start(args, format);
-	while((ch = *format++) != '\0')
+	while ((ch = *format++) != '\0')
 	{
-	if(ch == '%')
+	if (ch == '%') 
 	{
-		ch = *++format;
-		switch(ch)
+		ch = *format++;
+		switch (ch)
 		{
 			char cha;
 			const char* value;
