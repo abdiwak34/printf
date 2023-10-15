@@ -2,6 +2,7 @@
 #include "main.h"
 #include <stdarg.h>
 #include <string.h>
+#include <unistd.h>
 /**
  *_printf - is function that produces output according to a format
  *@format: is argument that out function
@@ -13,7 +14,7 @@ int _printf(const char *format, ...)
 	va_list args;
 	int count;
 	va_start(args, format);
-	count = vprintf(format, args);
+	count = strlen(format);
        	va_end(args);
 	return count;
 }
