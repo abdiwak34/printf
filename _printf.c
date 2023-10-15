@@ -11,61 +11,44 @@
 int _printf(const char *format, ...)
 {
 	va_list args;
-	int count;
-	char ch;
-
-	count = 0;
 	va_start(args, format);
-	while(*format++ != '\n')
+
+	int count = 0;
+	const char *c;
+	for( c = format; *c != '\n'; c++)
 	{
-	if((ch = *format) != '%')
-	{
-		ch++;
-	}
-	switch(*++format)
-	{
-	while ((ch = *format++) != '\0')
-	{
-	if (ch == '%') 
-	{
-		char cha;
-		const char* value;
-		ch = *format++;
-		switch (ch)
+		if(*c == '\n')
 		{
-		case 'c':
-			cha = va_arg(args, int);
-			_putchar(cha);
-			count++;
-			break;
-		case 's':
-			value = va_arg(args, const char*);
-			while(*value != '\0')
-			{
-				_putchar(*value);
+			c++;
+		switch(*c)
+		{
+			case 'c':
+				int ch = va_arg(args, int);
+				_putchar(ch);
 				count++;
-				value++;
+				break;
+		}
+			case 's':
+		{
+			const char *str = va_arg(args, const char *);
+			while (*str != '\n')
+			{
+				_putchar(*str);
+				str++;
 			}
 			break;
-		case '%':
-			_putchar('%');
-			count++;
-			break;
-		default:
-			_putchar('%');
-			_putchar(ch);
-			count += 2;
+		}
+			default:
+		{
 			break;
 		}
-	}
-	else
-	{
-	putchar(ch);
-	count++;
-	}
-	}
-}
-}
-va_end(args);
-return count;
+		}
+		else
+		{
+			_putchar(*c);
+			count++;
+		}
+		}
+	va_end(args);
+	return count;
 }
