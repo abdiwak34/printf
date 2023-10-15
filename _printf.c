@@ -50,6 +50,7 @@ int _printf(const char *format, ...)
 	putchar(ch);
 	count++;
 	}
+	}
 	va_end(args);
 	return count;
 }
