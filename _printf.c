@@ -10,51 +10,9 @@
 int _printf(const char *format, ...)
 {
 	va_list args;
-	int count;
-	char ch;
-	count = 0;
 	va_start(args, format);
-	while((ch = *format++) != '\0')
-	{
-	if(ch == '%')
-	{
-		ch = *format++;
-		switch(ch)
-		{
-			char cha;
-			const char* value;
-		case 'c':
-			cha = va_arg(args, int);
-			_putchar(cha);
-			count++;
-			break;
-		case 's':
-			value = va_arg(args, const char*);
-			while(*value != '\0')
-			{
-				_putchar(*value);
-				count++;
-				value++;
-			}
-			break;
-		case '%':
-			_putchar('%');
-			count++;
-			break;
-
-		default:
-			_putchar('%');
-			_putchar(ch);
-			count += 2;
-			break;
-		}
-	}
-	else
-	{
-	putchar(ch);
-	count++;
-	}
-	}
+	int result = vprintf(format, args);
 	va_end(args);
-	return count;
+
+	return result;
 }
