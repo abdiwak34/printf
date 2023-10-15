@@ -1,20 +1,61 @@
 #include <stdio.h>
-#include "main.h"
-#include <string.h>
 #include <stdarg.h>
-/**
- *_printf - is function that produces output according to a format
- *@format: is argument that out function
- *Return: always lenght of string
- */
+#include "main.h"
+
 int _printf(const char *format, ...)
 {
-	va_list args;
-	int result;
+    va_list args;
+    va_start(args, format);
 
-	va_start(args, format);
-	result = vprintf(format, args);
-	va_end(args);
+    int count = 0;
+    char c;
 
-	return (result);
+    while ((c = *format++) != '\0')
+    {
+        if (c != '%')
+        {
+            putchar(c);
+            count++;
+        }
+        else
+        {
+            c = *format++;
+            switch (c)
+            {
+                case 'c':
+                    {
+                        char ch = (char)va_arg(args, int);
+                        putchar(ch);
+                        count++;
+                        break;
+                    }
+                case 's':
+                    {
+                        const char *str = va_arg(args, const char *);
+                        while (*str != '\0')
+                        {
+                            putchar(*str++);
+                            count++;
+                        }
+                        break;
+                    }
+                case '%':
+                    {
+                        putchar('%');
+                        count++;
+                        break;
+                    }
+                default:
+                    {
+                        putchar('%');
+                        putchar(c);
+                        count += 2;
+                        break;
+                    }
+            }
+        }
+    }
+
+    va_end(args);
+    return count;
 }
