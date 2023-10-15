@@ -4,11 +4,11 @@
 
 int _printf(const char *format, ...)
 {
+	int count = 0;
+	char c;
     va_list args;
     va_start(args, format);
 
-    int count = 0;
-    char c;
 
     while ((c = *format++) != '\0')
     {
