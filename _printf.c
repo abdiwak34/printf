@@ -10,18 +10,12 @@
 
 int _printf(const char *format, ...)
 {
-	int i, length;
 	va_list args;
-
-	i = 0;
-	length=0;
-	length=strlen(format);
+	int count;
 	va_start(args, format);
-	if(format[i] != '%')
-	{
-		_putchar(format[i]);
-	}
-	return (length);
+	count = vprintf(format, args);
+       	va_end(args);
+	return count;
 }
 
 
