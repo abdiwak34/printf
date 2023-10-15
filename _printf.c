@@ -16,24 +16,25 @@ int _printf(const char *format, ...)
 
 	count = 0;
 	va_start(args, format);
-	while((ch = *format++) != '\n')
+	while((ch = *format++) != '\0')
 	{
 	if(ch == '%')
 	{
 		ch = *format++;
 		switch(ch)
 		{
-			int cha;
+			char cha;
 			const char* value;
 		case 'c':
 			cha = va_arg(args, int);
 			_putchar(cha);
+			count++;
 			break;
 		case 's':
 			value = va_arg(args, const char*);
 			while(*value != '\0')
 			{
-				_putchar(value);
+				_putchar(*value);
 				count++;
 				value++;
 			}
