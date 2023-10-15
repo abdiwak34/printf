@@ -15,7 +15,7 @@ int _printf(const char *format, ...)
 
 	int count = 0;
 	const char *c;
-	for( c = format; *c != '\n'; c++)
+	for( c = format; *c != '\0'; c++)
 	{
 		if(*c == '\n')
 		{
