@@ -1,8 +1,7 @@
 #include <stdio.h>
 #include "main.h"
-#include <stdarg.h>
 #include <string.h>
-#include <unistd.h>
+#include <stdarg.h>
 /**
  *_printf - is function that produces output according to a format
  *@format: is argument that out function
@@ -13,7 +12,6 @@ int _printf(const char *format, ...)
 {
 	va_list args;
 	int count;
-	char ch;
 
 	count = 0;
 	va_start(args, format);
@@ -21,17 +19,17 @@ int _printf(const char *format, ...)
 	{
 	if(ch == '%')
 	{
-	switch(ch)
-	{
+		switch(ch)
+		{
+		int cha;
+		const char value;
 		case 'c':
-			int cha;
 			cha = va_arg(args, int);
 			_putchar(cha);
 			break;
 		case 's':
-			const char* value;
 			value = va_arg(args, const char*);
-			while(value != '\n')
+			while(*value != '\0')
 			{
 				_putchar(value);
 				count++;
@@ -40,12 +38,15 @@ int _printf(const char *format, ...)
 		case '%':
 			_putchar('%');
 			break;
+			count++;
 
+		}
 	}
-
-       	va_end(args);
+	else
+	{
+	putchar(ch);
+	count++;
+	}
+	va_end(args);
 	return count;
 }
-
-
-
