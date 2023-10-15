@@ -10,8 +10,10 @@
 int _printf(const char *format, ...)
 {
 	va_list args;
+	int result;
+
 	va_start(args, format);
-	int result = vprintf(format, args);
+	result = vprintf(format, args);
 	va_end(args);
 
 	return result;
