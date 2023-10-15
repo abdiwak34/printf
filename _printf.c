@@ -20,7 +20,8 @@ int _printf(const char *format, ...)
                     count++;
                     break;
                 }
-                case 's': {
+                case 's': 
+			  {
                     const char *str = va_arg(args, const char *);
                     while (*str != '\0') {
                         putchar(*str);
@@ -29,6 +30,14 @@ int _printf(const char *format, ...)
                     }
                     break;
                 }
+		case 'd':
+		case 'i':
+			  {
+				  int num = va_arg(args, int);
+				  _putchar(num);
+				  count++;
+				  break;
+			  }
                 case '%': {
                     putchar('%');
                     count++;
