@@ -1,69 +1,60 @@
-#include <stdarg.h>
-#include <unistd.h>
+#include <stdio.h>
 #include "main.h"
-
-int (*find_function(const char *format))(va_list)
-{
-	unsigned int i = 0;
-	code_f find_f[] = {
-		{"c", print_char},
-		{"s", print_string},
-		{"i", print_int},
-		{"d", print_dec},
-		{"r", print_rev},
-		{"b", print_bin},
-		{"u", print_unsig},
-		{"o", print_octal},
-		{"x", print_x},
-		{"X", print_X},
-		{"R", print_rot13},
-		{NULL, NULL}
-	};
-
-	while (find_f[i].sc)
-	{
-		if (find_f[i].sc[0] == (*format))
-			return (find_f[i].f);
-		i++;
-	}
-	return (NULL);
-}
-
+#include <string.h>
+#include <stdarg.h>
+/**
+ *_printf - is function that produces output according to a format
+ *@format: is argument that out function
+ *Return: always lenght of string
+ */
 int _printf(const char *format, ...)
 {
-	va_list ap;
-	int (*f)(va_list);
-	unsigned int i = 0, cprint = 0;
-
-	if (format == NULL)
-		return (-1);
-	va_start(ap, format);
-	while (format[i])
+	va_list args;
+	int count;
+	char ch;
+	count = 0;
+	va_start(args, format);
+	while ((ch = *format++) != '\0')
 	{
-		while (format[i] != '%' && format[i])
+	if (ch == '%') 
+	{
+		int cha;
+		char cha;
+		const char* value;
+		ch = *format++;
+		switch (ch)
 		{
-			_putchar(format[i]);
-			cprint++;
-			i++;
+		case 'c':
+			cha = va_arg(args, int);
+			_putchar(cha);
+			count++;
+			break;
+		case 's':
+			value = va_arg(args, const char*);
+			while(*value != '\0')
+			{
+				_putchar(*value);
+				count++;
+				value++;
+			}
+			break;
+		case '%':
+			_putchar('%');
+			count++;
+			break;
+		default:
+			_putchar('%');
+			_putchar(ch);
+			count += 2;
+			break;
 		}
-		if (format[i] == '\0')
-			return (cprint);
-		f = find_function(&format[i + 1]);
-		if (f != NULL)
-		{
-			cprint += f(ap);
-			i += 2;
-			continue;
-		}
-		if (!format[i + 1])
-			return (-1);
-		_putchar(format[i]);
-		cprint++;
-		if (format[i + 1] == '%')
-			i += 2;
-		else
-			i++;
 	}
-	va_end(ap);
-	return (cprint);
+	else
+	{
+	putchar(ch);
+	count++;
+	}
+	}
+	va_end(args);
+	return count;
 }
