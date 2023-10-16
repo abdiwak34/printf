@@ -20,33 +20,23 @@ int _printf(const char *format, ...)
 		else
 		{
 			c = *format++;
-			if (c == 'c')
+			if (c == 'c' || c == 's' || c == '%')
 			{
 				char ch = (char)va_arg(args, int);
-
-				printf_char(ch);
-				count++;
-			}
-			else if (c == 's')
-			{
-				const char *str = va_arg(args, const char *);
-
-				while (*str)
+				switch(ch)
 				{
-					putchar(*str++);
-					count++;
+					case 'c':
+						printf_char(args);
+					case 's':
+						printf_string(args);
+					case '%':
+						putchar('%');
+					default:
+						putchar('%');
+						putchar(c);
+						count += 2;
 				}
-			}
-			else if (c == '%')
-			{
-				putchar('%');
-				count++;
-			}
-			else
-			{
-				putchar('%');
-				putchar(c);
-				count += 2;
+
 			}
 		}
 	}

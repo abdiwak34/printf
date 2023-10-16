@@ -8,12 +8,12 @@
  * Return: number of bytes printed
  */
 
-int printf_string(va_list s)
+int printf_string(va_list args)
 {
 	char *str;
 	int k;
 
-	str = va_arg(s, char*);
+	str = va_arg(args, char*);
 
 	if (str == NULL)
 	{
