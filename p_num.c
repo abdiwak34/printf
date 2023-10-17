@@ -1,3 +1,5 @@
+#include "main.h"
+
 int print_num(va_list n)
 {
 	long int num = va_arg(n, int);
