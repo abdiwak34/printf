@@ -49,8 +49,6 @@ int _printf(const char *format, ...)
 	putchar('%');
 	putchar(c);
 	count += 2;
-	}
-<<<<<<< HEAD
 	
 =======
 	}
