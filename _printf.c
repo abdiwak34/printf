@@ -51,6 +51,12 @@ int custom_print(const char *format, va_list args)
 					str++;
 				}
 			}
+			else if ((*format == 'd' || *format == 'i'))
+			{
+				int num = va_arg(args, int);
+				_putchar(num);
+				count++;
+			}
 			else if (*format == '%')
 			{
 				_putchar('%');
