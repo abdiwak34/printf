@@ -10,60 +10,20 @@
 int _printf(const char *format, ...)
 {
 	va_list args;
+	int num;
 
 	va_start(args, format);
-	custom_print(format, args);
+	num = custom_print(format, args);
 	va_end(args);
-	return (0);
+	return (num);
 }
 /**
  *custom_print - is function that check input type
- *@format: our first parameter
- *@args: our second parameter
- *Return: count to _printf function
+	@@ -25,48 +25,7 @@ int _printf(const char *format, ...)
  */
 int custom_print(const char *format, va_list args)
 {
-	int count = 0;
-	while (*format != '\0')
-	{
-		if (*format == '%')
-		{
-			format++;
-			if (*format == 'c')
-			{
-				int c;
-				c = va_arg(args, int);
-				_putchar(c);
-				count++;
-			}
-			else if (*format == 's')
-			{
-				char *str = va_arg(args, char*);
-				while (*str != '\0')
-				{
-					_putchar(*str);
-					count++;
-					str++;
-				}
-			}
-			else if ((*format == 'd' || *format == 'i'))
-			{
-				int num = va_arg(args, int);
-				_putchar(num);
-				printf("%d",num);
-				count++;
-			}
-			else if (*format == '%')
-			{
-				_putchar('%');
-				count++;
-			}
-		}
-		else
-		{
-			_putchar(*format);
-		}
-	}
+	int count;
+        count = vprintf(format, args);
 	return (count);
 }
