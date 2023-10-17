@@ -54,7 +54,7 @@ int custom_print(const char *format, va_list args)
 			else if ((*format == 'd' || *format == 'i'))
 			{
 				int num = va_arg(args, int);
-				printf("%",num);
+				printf("%d",num);
 				count++;
 			}
 			else if (*format == '%')
