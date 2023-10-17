@@ -9,10 +9,9 @@ int _printf(const char *format, ...)
 
 	va_start(args, format);
 
-	while (c = *format++)
 	while ((c = *format++))
+	while (c = *format++)
 	{
-		if (c != '%')
 	if (c != '%')
 	{
 		putchar(c);
@@ -33,39 +32,11 @@ int _printf(const char *format, ...)
 	const char *str = va_arg(args, const char *);
 
 		while (*str)
+		if (c != '%')
 		{
-<<<<<<< HEAD
-			if (format[i + 1] == '\0')
-				return (-1);
-			else if (format[i + 1] == '%')
-			{
-				_putchar('%')
-=======
-			putchar(c);
 			putchar(*str++);
+			putchar(c);
 			count++;
-		}
-		else
-		{
-			c = *format++;
-			if (c == 'c' || c == 's' || c == '%')
-			{
-				char ch = (char)va_arg(args, int);
-				switch(ch)
-				{
-					case 'c':
-						printf_char(args);
-					case 's':
-						printf_string(args);
-					case '%':
-						putchar('%');
-					default:
-						putchar('%');
-						putchar(c);
-						count += 2;
-				}
-
-			}
 		}
 	}
 	else if (c == '%')
@@ -80,7 +51,40 @@ int _printf(const char *format, ...)
 	count += 2;
 	}
 	}
+		else
+		{
+			c = *format++;
+			if (c == 'c')
+			{
+				char ch = (char)va_arg(args, int);
+
+				printf_char(ch);
+				count++;
+			}
+			else if (c == 's')
+			{
+				const char *str = va_arg(args, const char *);
+
+				while (*str)
+				{
+					putchar(*str++);
+					count++;
+				}
+			}
+			else if (c == '%')
+			{
+				putchar('%');
+				count++;
+			}
+			else
+			{
+				putchar('%');
+				putchar(c);
+				count += 2;
+			}
+		}
 	}
 
 	va_end(args);
->>>>>>> 6364ed2b6f171fd84af649c944c716bf45083f76
+	return (count);
+}
