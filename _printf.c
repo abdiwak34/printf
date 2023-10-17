@@ -4,30 +4,42 @@
 
 int _printf(const char *format, ...)
 {
-	int count = 0;
-	char c;
-	va_list args;
+	va_list arr;
+	int i = 0, count = 0;
 
-	va_start(args, format);
-
-	while ((c = *format++))
+	if (!format)
+		return (-1);
+	va_start(arr, format);
+	while (format[i] != '\0')
 	{
-	if (c != '%')
-	{
-		putchar(c);
-		count++;
+		if (format[i] == '%')
+		{
+			if (format[i + 1] == '\0')
+				return (-1);
+			else if (format[i + 1] == '%')
+			{
+				_putchar('%');
+				count++;
+				i++;
+			}
+			else if (cmp_func(format[i + 1]) != NULL)
+			{
+				count += (cmp_func(format[i + 1]))(arr);
+				i++;
+			}
+			else
+			{
+				_putchar(format[i]);
+				count++;
+			}
+		}
+		else
+		{
+			_putchar(format[i]);
+			count++;
+		}
+		i++;
 	}
-	else
-	{
-		c = *format++;
-		if (c == 'c')
-	{
-		char ch = (char)va_arg(args, int);
-
-		putchar(ch);
-		count++;
-	}
-
-	va_end(args);
+	va_end(arr);
 	return (count);
 }
