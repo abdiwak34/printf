@@ -17,7 +17,7 @@ int custom_print(const char* format,va_list args)
 			else if (*format == 's')
 			{
 				char* str;
-				*str = va_arg(agrs, char*);
+				*str = va_arg(args, char*);
 				while (*str != '\0')
 				{
 					_putchar(*str);
@@ -35,5 +35,6 @@ int custom_print(const char* format,va_list args)
 		{
 			_putchar(*format);
 		}
+	}
 	return (count);
 }
