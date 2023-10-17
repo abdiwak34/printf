@@ -15,5 +15,5 @@ int print_string(va_list s);
 int _strlen(const char *s);
 int _strcmp(const char *s, const char *t);
 int print_char(va_list arr);
-
+int custom_print(const char* format, va_list args);
 #endif
