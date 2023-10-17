@@ -27,29 +27,6 @@ int _printf(const char *format, ...)
 		putchar(ch);
 		count++;
 	}
-	else if (c == 's')
-	{
-	const char *str = va_arg(args, const char *);
-
-		while (*str)
-		{
-			putchar(*str++);
-			count++;
-		}
-	}
-	else if (c == '%')
-	{
-	putchar('%');
-	count++;
-	}
-	else
-	{
-	putchar('%');
-	putchar(c);
-	count += 2;
-	}
-	}
-	}
 
 	va_end(args);
 	return (count);
