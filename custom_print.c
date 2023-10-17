@@ -1,4 +1,5 @@
 #include "main.h"
+#include <stdio.h>
 int custom_print(const char* format,va_list args)
 {
 	int count = 0;
@@ -16,8 +17,7 @@ int custom_print(const char* format,va_list args)
 			}
 			else if (*format == 's')
 			{
-				char* str;
-				*str = va_arg(args, char*);
+				char* str = va_arg(args, char*);
 				while (*str != '\0')
 				{
 					_putchar(*str);
