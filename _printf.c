@@ -10,11 +10,11 @@
 int _printf(const char *format, ...)
 {
 	va_list args;
-	int count;
+
 	va_start(args, format);
-	count = custom_print(format, args);
+	custom_print(format, args);
 	va_end(args);
-	return (count);
+	return (0);
 }
 /**
  *custom_print - is function that check input type
@@ -51,7 +51,7 @@ int custom_print(const char *format, va_list args)
 			{
 				int num = va_arg(args, int);
 				_putchar(num);
-				printf("%",num);
+				printf("%d",num);
 				count++;
 			}
 			else if (*format == '%')
