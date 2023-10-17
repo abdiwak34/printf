@@ -1,5 +1,5 @@
 #include "main.h"
-int (*comp(const char a))(va_list)
+int (*comp_vargs(const char a))(va_list)
 {
 	myprintf printf[] =
 	{
