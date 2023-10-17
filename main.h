@@ -9,4 +9,5 @@
 
 int _printf(const char *format, ...);
 int _putchar(char);
+int (*comp(const char a))(va_List);
 #endif
