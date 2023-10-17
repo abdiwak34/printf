@@ -9,7 +9,6 @@
 
 int _printf(const char *format, ...);
 int _putchar(char);
-int (*comp_vargs(const char a))(va_List);
 int  print_bin(va_list arr);
 int print_num(va_list n);
 int print_string(va_list s);

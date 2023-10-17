@@ -1,24 +1,86 @@
 #include <stdio.h>
 #include <stdarg.h>
 #include "main.h"
-
 int _printf(const char *format, ...)
 {
-<<<<<<< HEAD
-	
-=======
-	va_list arr;
-	int i = 0, count = 0;
+	int count = 0;
+	char c;
+	va_list args;
 
-	if (!format)
-		return (-1);
-	va_start(arr, format);
-	while (format[i] != '\0')
+	va_start(args, format);
+
+	while (c = *format++)
+	while ((c = *format++))
 	{
-		if (format[i] == '%')
+		if (c != '%')
+	if (c != '%')
+	{
+		putchar(c);
+		count++;
+	}
+	else
+	{
+		c = *format++;
+		if (c == 'c')
+	{
+		char ch = (char)va_arg(args, int);
+
+		putchar(ch);
+		count++;
+	}
+	else if (c == 's')
+	{
+	const char *str = va_arg(args, const char *);
+
+		while (*str)
 		{
+<<<<<<< HEAD
 			if (format[i + 1] == '\0')
 				return (-1);
 			else if (format[i + 1] == '%')
 			{
 				_putchar('%')
+=======
+			putchar(c);
+			putchar(*str++);
+			count++;
+		}
+		else
+		{
+			c = *format++;
+			if (c == 'c' || c == 's' || c == '%')
+			{
+				char ch = (char)va_arg(args, int);
+				switch(ch)
+				{
+					case 'c':
+						printf_char(args);
+					case 's':
+						printf_string(args);
+					case '%':
+						putchar('%');
+					default:
+						putchar('%');
+						putchar(c);
+						count += 2;
+				}
+
+			}
+		}
+	}
+	else if (c == '%')
+	{
+	putchar('%');
+	count++;
+	}
+	else
+	{
+	putchar('%');
+	putchar(c);
+	count += 2;
+	}
+	}
+	}
+
+	va_end(args);
+>>>>>>> 6364ed2b6f171fd84af649c944c716bf45083f76
