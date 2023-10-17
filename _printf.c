@@ -1,49 +1,78 @@
 #include <stdio.h>
 #include <stdarg.h>
 #include "main.h"
-
 int _printf(const char *format, ...)
 {
-<<<<<<< HEAD
-	
-=======
-	va_list arr;
-	int i = 0, count = 0;
+	int count = 0;
+	char c;
+	va_list args;
 
-	if (!format)
-		return (-1);
-	va_start(arr, format);
-	while (format[i] != '\0')
+	va_start(args, format);
+
+	while (c = *format++)
+	while ((c = *format++))
 	{
-		if (format[i] == '%')
+		if (c != '%')
+	if (c != '%')
+	{
+		putchar(c);
+		count++;
+	}
+	else
+	{
+		c = *format++;
+		if (c == 'c')
+	{
+		char ch = (char)va_arg(args, int);
+
+		putchar(ch);
+		count++;
+	}
+	else if (c == 's')
+	{
+	const char *str = va_arg(args, const char *);
+
+		while (*str)
 		{
-			if (format[i + 1] == '\0')
-				return (-1);
-			else if (format[i + 1] == '%')
-			{
-				_putchar('%');
-				count++;
-				i++;
-			}
-			else if (cmp_func(format[i + 1]) != NULL)
-			{
-				count += (cmp_func(format[i + 1]))(arr);
-				i++;
-			}
-			else
-			{
-				_putchar(format[i]);
-				count++;
-			}
+			putchar(c);
+			putchar(*str++);
+			count++;
 		}
 		else
 		{
-			_putchar(format[i]);
-			count++;
+			c = *format++;
+			if (c == 'c' || c == 's' || c == '%')
+			{
+				char ch = (char)va_arg(args, int);
+				switch(ch)
+				{
+					case 'c':
+						printf_char(args);
+					case 's':
+						printf_string(args);
+					case '%':
+						putchar('%');
+					default:
+						putchar('%');
+						putchar(c);
+						count += 2;
+				}
+
+			}
 		}
-		i++;
 	}
-	va_end(arr);
-	return (count);
->>>>>>> a4e7d9142c296aeb06e5fbd0aa35b86ff2872c2b
-}
+	else if (c == '%')
+	{
+	putchar('%');
+	count++;
+	}
+	else
+	{
+	putchar('%');
+	putchar(c);
+	count += 2;
+	}
+	}
+	}
+
+	va_end(args);
