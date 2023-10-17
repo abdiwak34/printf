@@ -10,4 +10,5 @@
 int _printf(const char *format, ...);
 int _putchar(char);
 int (*comp(const char a))(va_List);
+int  print_bin(va_list arr);
 #endif
