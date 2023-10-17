@@ -79,8 +79,4 @@ int _printf(const char *format, ...)
 	putchar(c);
 	count += 2;
 	}
-	}
-	}
-
-	va_end(args);
->>>>>>> 6364ed2b6f171fd84af649c944c716bf45083f76
+	
